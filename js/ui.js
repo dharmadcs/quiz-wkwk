@@ -105,18 +105,46 @@ export function updateCategory(category) {
 
 export function renderOptions(question, onOptionClick) {
     optionsContainer.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
     question.options.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.className = `option-btn glass-panel p-4 md:p-6 rounded-xl text-left text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-cyan-50 hover:bg-white/10 relative group min-h-[60px] md:min-h-[80px]`;
         btn.innerHTML = `
             <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-cyan-500/50 group-hover:border-white transition-colors"></div>
             <div class="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-cyan-500/50 group-hover:border-white transition-colors"></div>
-            <span class="relative z-10 font-mono mr-2 md:mr-3 text-cyan-400 text-sm md:text-lg">0${i + 1}</span>
+            <span class="relative z-10 font-mono mr-2 md:mr-3 text-cyan-400 text-sm md:text-lg">${letters[i]}</span>
             <span class="relative z-10 group-hover:text-white transition-colors">${opt}</span>
         `;
         btn.addEventListener('click', () => onOptionClick(i, btn));
         optionsContainer.appendChild(btn);
     });
+}
+
+export function showDuplicateNameError() {
+    nameError.innerText = "Nama sudah digunakan! Pilih nama lain.";
+    nameError.style.opacity = 1;
+}
+
+export function updateCardAvatar(avatarIcon) {
+    const avatarEl = document.getElementById('card-avatar');
+    if (!avatarEl) return;
+    
+    // Check if avatar is an image path or emoji
+    const isImage = avatarIcon && (
+        avatarIcon.startsWith('/') ||        // Local path
+        avatarIcon.startsWith('http://') ||   // HTTP URL
+        avatarIcon.startsWith('https://')     // HTTPS URL (Supabase)
+    );
+    
+    if (isImage) {
+        // Render image avatar with circle style
+        avatarEl.innerHTML = `<img src="${avatarIcon}" alt="Avatar" class="w-full h-full rounded-full object-cover" />`;
+        avatarEl.className = 'w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-cyan-400 shadow-lg shadow-cyan-500/30';
+    } else {
+        // Render emoji avatar
+        avatarEl.innerText = avatarIcon;
+        avatarEl.className = 'text-4xl md:text-5xl';
+    }
 }
 
 export function setAllButtonsDisabled(disabled) {

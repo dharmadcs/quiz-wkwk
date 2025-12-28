@@ -1,16 +1,17 @@
 // --- MAIN GAME LOGIC ---
-import { gameConfig, allQuestionsDB, opponents } from './config.js';
+import { gameConfig, allQuestionsDB, opponents, playerAvatars } from './config.js';
 import { playSound, initAudio, setupButtonSounds } from './audio.js';
 import { createExplosion } from './particles.js';
-import { setPlayerName, renderLeaderboard, simulateOpponentActivity } from './leaderboard.js';
+import { setPlayerName, renderLeaderboard, simulateOpponentActivity, fetchRealScores } from './leaderboard.js';
+import { saveScore, checkPlayerExists } from './supabase.js';
 import {
     getLives, decreaseLives, resetLives, updateLivesDisplay,
     updateMyStats, updateMultiplier, getMultiplier,
     updateQuestionText, updateQuestionNumber, updateCategory,
     renderOptions, setAllButtonsDisabled, highlightCorrectAnswer, highlightWrongAnswer,
     startTimer, showGameOver, hideGameOver, showStartScreen, hideStartScreen,
-    showMainUI, setCardName, showNameError, hideNameError,
-    logChat, getPlayerName, setupEnterKey, shakeScreen
+    showMainUI, setCardName, showNameError, hideNameError, showDuplicateNameError,
+    logChat, getPlayerName, setupEnterKey, shakeScreen, updateCardAvatar
 } from './ui.js';
 
 // Game State
@@ -18,9 +19,12 @@ let activeSessionQuestions = [];
 let currentQIndex = 0;
 let myScore = 0;
 let myStreak = 0;
+let maxStreak = 0; // Track best streak
 let isAnswering = false;
 let playerName = "Player";
+let selectedAvatar = playerAvatars[0].icon;
 let timeLeft = gameConfig.timerDuration;
+let currentShuffledQuestion = null;
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -30,21 +34,53 @@ function shuffle(array) {
     return array;
 }
 
-export function checkNameAndStart() {
+function shuffleQuestion(question) {
+    const shuffledOptions = question.options.map((opt, index) => ({
+        text: opt,
+        isCorrect: index === question.correct
+    }));
+    shuffle(shuffledOptions);
+    const newCorrectIndex = shuffledOptions.findIndex(opt => opt.isCorrect);
+    return {
+        ...question,
+        options: shuffledOptions.map(opt => opt.text),
+        correct: newCorrectIndex
+    };
+}
+
+export function selectAvatar(avatarIcon) {
+    selectedAvatar = avatarIcon;
+}
+
+export async function checkNameAndStart() {
     const val = getPlayerName();
     if (!val) {
         showNameError();
         return;
     }
+    
+    // Check if player name already exists
+    const nameExists = await checkPlayerExists(val);
+    if (nameExists) {
+        showDuplicateNameError();
+        return;
+    }
+    
     playerName = val;
     setPlayerName(playerName);
+    updateCardAvatar(selectedAvatar);
     hideNameError();
     hideStartScreen();
     showMainUI();
     setCardName(playerName);
     initAudio();
     prepareSession();
-    renderLeaderboard();
+    
+    // Fetch real scores from Supabase
+    fetchRealScores().then(() => {
+        renderLeaderboard();
+    });
+    
     logChat("System", "Match Started. Good luck. Survive as long as you can!");
     logChat("System", `Mode: Survival (${gameConfig.maxLives} Lives)`);
     loadQuestion(0);
@@ -54,6 +90,7 @@ function prepareSession() {
     // Reset scores
     myScore = 0;
     myStreak = 0;
+    maxStreak = 0;
     currentQIndex = 0;
     resetLives();
     updateMyStats(0, 0);
@@ -75,11 +112,14 @@ function loadQuestion(index) {
     currentQIndex = index;
     timeLeft = gameConfig.timerDuration;
 
-    const q = activeSessionQuestions[index];
-    updateQuestionText(q.q);
-    updateCategory(q.category);
+    // Shuffle the question options and store it
+    const originalQ = activeSessionQuestions[index];
+    currentShuffledQuestion = shuffleQuestion(originalQ);
+    
+    updateQuestionText(currentShuffledQuestion.q);
+    updateCategory(currentShuffledQuestion.category);
     updateQuestionNumber(index + 1, gameConfig.questionsPerSession);
-    renderOptions(q, handleAnswer);
+    renderOptions(currentShuffledQuestion, handleAnswer);
     startTimer(handleTimeUp);
 }
 
@@ -88,8 +128,7 @@ function handleAnswer(selectedIndex, btnElement) {
     isAnswering = false;
     playSound('click');
 
-    const currentQ = activeSessionQuestions[currentQIndex];
-    const correctIndex = currentQ.correct;
+    const correctIndex = currentShuffledQuestion.correct;
     const allBtns = document.getElementById('options-container').children;
 
     setAllButtonsDisabled(true);
@@ -106,6 +145,10 @@ function handleAnswer(selectedIndex, btnElement) {
 
         myScore += roundScore;
         myStreak++;
+        // Update max streak
+        if (myStreak > maxStreak) {
+            maxStreak = myStreak;
+        }
         updateMultiplier(myStreak);
 
         const rect = btnElement.getBoundingClientRect();
@@ -151,8 +194,7 @@ function handleAnswer(selectedIndex, btnElement) {
 
 function handleTimeUp() {
     isAnswering = false;
-    const currentQ = activeSessionQuestions[currentQIndex];
-    const correctIndex = currentQ.correct;
+    const correctIndex = currentShuffledQuestion.correct;
     
     highlightCorrectAnswer(correctIndex);
     playSound('wrong');
@@ -189,6 +231,16 @@ function endGame() {
     
     const questionsAnswered = currentQIndex + 1;
     logChat("System", `Session Complete! Final Score: ${myScore} | Questions: ${questionsAnswered}`);
+    
+    // Save score to Supabase with max streak (not current streak)
+    if (myScore > 0) {
+        saveScore(playerName, myScore, maxStreak, selectedAvatar).then(() => {
+            logChat("System", "Score saved to leaderboard!");
+            fetchRealScores().then(() => {
+                renderLeaderboard();
+            });
+        });
+    }
 }
 
 // Initialize button sounds

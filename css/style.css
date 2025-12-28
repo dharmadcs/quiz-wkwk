@@ -168,3 +168,346 @@ body {
     opacity: 0.3;
     filter: grayscale(100%);
 }
+
+/* Avatar Selection Styles */
+.avatar-option {
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.avatar-option:hover {
+    transform: scale(1.05);
+    border-color: rgba(0, 243, 255, 0.8);
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+.avatar-option.selected {
+    border-color: var(--neon-pink);
+    background: rgba(188, 19, 254, 0.15);
+    box-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
+    transform: scale(1.05);
+}
+
+/* Avatar Image Styles */
+.avatar-selection-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(124, 58, 237, 0.5);
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.avatar-option:hover .avatar-selection-img {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+.avatar-option.selected .avatar-selection-img {
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(188, 19, 254, 0.6);
+    transform: scale(1.1);
+}
+
+/* Leaderboard Avatar Image */
+.leaderboard-avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--neon-blue);
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+
+.avatar-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.avatar-name {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Login Leaderboard Styles */
+.leaderboard-item {
+    animation: slideInLeft 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.leaderboard-item:nth-child(1) { animation-delay: 0.1s; }
+.leaderboard-item:nth-child(2) { animation-delay: 0.15s; }
+.leaderboard-item:nth-child(3) { animation-delay: 0.2s; }
+.leaderboard-item:nth-child(4) { animation-delay: 0.25s; }
+.leaderboard-item:nth-child(5) { animation-delay: 0.3s; }
+.leaderboard-item:nth-child(6) { animation-delay: 0.35s; }
+.leaderboard-item:nth-child(7) { animation-delay: 0.4s; }
+.leaderboard-item:nth-child(8) { animation-delay: 0.45s; }
+.leaderboard-item:nth-child(9) { animation-delay: 0.5s; }
+.leaderboard-item:nth-child(10) { animation-delay: 0.55s; }
+
+/* ===== MOBILE RESPONSIVE STYLES ===== */
+
+/* Mobile: Avatar Selection - Horizontal Scroll */
+@media (max-width: 640px) {
+    #avatar-selection {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 12px;
+        padding: 4px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Custom scrollbar for horizontal scroll */
+    #avatar-selection::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    #avatar-selection::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 2px;
+    }
+    
+    #avatar-selection::-webkit-scrollbar-thumb {
+        background: var(--neon-blue);
+        border-radius: 2px;
+    }
+    
+    /* Avatar options */
+    .avatar-option {
+        min-width: 72px;
+        min-height: 72px;
+        padding: 8px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
+    
+    .avatar-selection-img {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .avatar-option:hover .avatar-selection-img,
+    .avatar-option.selected .avatar-selection-img {
+        transform: scale(1.05);
+    }
+}
+
+/* Mobile: Player Card */
+@media (max-width: 640px) {
+    #card-name {
+        font-size: 1rem;
+        max-width: 80px;
+    }
+}
+
+/* Mobile: Question Text */
+@media (max-width: 640px) {
+    #question-text {
+        font-size: 1.25rem !important;
+        line-height: 1.4;
+    }
+}
+
+/* Mobile: Option Buttons */
+@media (max-width: 640px) {
+    .option-btn {
+        min-height: 50px !important;
+        padding: 12px !important;
+    }
+    
+    .option-btn span:first-child {
+        font-size: 0.875rem;
+        margin-right: 0.5rem;
+    }
+    
+    .option-btn span:last-child {
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile: Timer */
+@media (max-width: 640px) {
+    .relative.w-16.h-16 {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    
+    #timer-text {
+        font-size: 1.125rem;
+    }
+}
+
+/* Mobile: Stats Cards */
+@media (max-width: 640px) {
+    .bg-black\/30.p-2 {
+        padding: 8px !important;
+    }
+    
+    .text-xl.font-bold {
+        font-size: 1.125rem;
+    }
+}
+
+/* Mobile: Login Screen */
+@media (max-width: 768px) {
+    #start-screen {
+        padding: 8px;
+        overflow-y: auto;
+        align-items: flex-start;
+    }
+    
+    #start-screen > div {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    /* Login panel - make it very compact */
+    .glass-panel.p-6.md\:p-8:first-child {
+        padding: 10px;
+        flex: 0 0 auto;
+    }
+    
+    /* Leaderboard panel - ensure visibility with scroll */
+    .glass-panel.p-6:last-child {
+        flex: 1 1 auto;
+        min-height: 200px;
+        max-height: 280px;
+    }
+    
+    #player-name-input {
+        font-size: 1rem;
+        padding: 8px 10px;
+        margin-bottom: 0.4rem;
+        min-height: 40px;
+    }
+    
+    .text-4xl.md\:text-5xl.lg\:text-6xl {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .text-sm.text-cyan-400 {
+        font-size: 0.7rem !important;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Very compact spacing */
+    .mb-6 {
+        margin-bottom: 0.6rem !important;
+    }
+    
+    /* Avatar section - very compact */
+    #avatar-selection {
+        margin-bottom: 0.4rem;
+    }
+    
+    /* Button - very compact */
+    .group.relative.px-8.py-4 {
+        padding: 10px 20px;
+        margin-top: 0.5rem;
+    }
+    
+    /* Description text - compact */
+    .text-gray-300.text-sm {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Mobile: Game Over Screen */
+@media (max-width: 640px) {
+    #game-over-screen {
+        padding: 20px;
+    }
+    
+    .text-4xl.md\:text-5xl {
+        font-size: 2rem;
+    }
+    
+    #final-score {
+        font-size: 2rem;
+    }
+    
+    .px-8.py-3 {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile: Chat Log */
+@media (max-width: 640px) {
+    #chat-log {
+        font-size: 0.625rem;
+    }
+}
+
+/* Mobile: Leaderboard */
+@media (max-width: 640px) {
+    .leaderboard-avatar-img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .text-sm.font-bold {
+        font-size: 0.75rem;
+    }
+    
+    .text-xs {
+        font-size: 0.625rem;
+    }
+    
+    .w-10.h-10 {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Small Mobile: Avatar Selection - Smaller avatars */
+@media (max-width: 480px) {
+    .avatar-option {
+        min-width: 64px;
+        min-height: 64px;
+        padding: 6px;
+    }
+    
+    .avatar-selection-img {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 380px) {
+    .text-lg.md\:text-xl {
+        font-size: 1rem;
+    }
+    
+    .text-2xl.lg\:text-3xl.xl\:text-4xl {
+        font-size: 1.125rem !important;
+    }
+    
+    .option-btn {
+        min-height: 45px !important;
+        padding: 10px !important;
+    }
+}

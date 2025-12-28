@@ -134,3 +134,19 @@ export const opponents = [
     { name: "PixelPilot", score: 120, streak: 0, avatar: "✈️" },
     { name: "CyberGhost", score: 50, streak: 0, avatar: "👻" },
 ];
+
+// --- AVATAR SELECTION ---
+export const playerAvatars = [
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-01.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-02.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-03.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-04.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-05.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-06.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-07.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-08.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-09.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-10.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-11.png" },
+    { icon: "https://pritjxrtdyochyrykfko.supabase.co/storage/v1/object/public/avatars/avatar-12.png" }
+];

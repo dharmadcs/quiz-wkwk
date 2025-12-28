@@ -185,8 +185,8 @@
     <canvas id="particle-canvas"></canvas>
 
     <!-- Start Overlay -->
-    <div id="start-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md">
-        <div class="text-center p-8 glass-panel rounded-2xl max-w-lg border border-cyan-500/30 w-full">
+    <div id="start-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+        <div class="text-center p-6 md:p-8 glass-panel rounded-2xl max-w-lg border border-cyan-500/30 w-full">
             <h1
                 class="font-display text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-6 tracking-wider filter drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">
                 TRIVIA ARENA
@@ -226,7 +226,7 @@
         id="main-ui">
 
         <!-- Left Panel: Stats & Chat -->
-        <aside class="w-64 hidden md:flex flex-col gap-4">
+        <aside class="w-full md:w-64 flex flex-col gap-4 order-2 md:order-1">
             <!-- Player Card (Self) -->
             <div class="glass-panel p-4 rounded-xl border-l-4 border-cyan-500 flex flex-col gap-2">
                 <div class="flex items-center gap-3">
@@ -262,7 +262,7 @@
         </aside>
 
         <!-- Center Panel: Gameplay -->
-        <section class="flex-1 flex flex-col gap-6 relative">
+        <section class="flex-1 flex flex-col gap-4 md:gap-6 relative order-1 md:order-2">
 
             <!-- Top Bar -->
             <div class="flex justify-between items-center glass-panel p-4 rounded-2xl">
@@ -289,14 +289,14 @@
             <div class="flex-1 flex items-center justify-center">
                 <div class="w-full max-w-3xl text-center p-6 relative">
                     <h2 id="question-text"
-                        class="relative font-display text-3xl md:text-5xl font-bold leading-tight text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                        class="relative font-display text-xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] px-2">
                         Initializing...
                     </h2>
                 </div>
             </div>
 
             <!-- Answer Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="options-container"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4" id="options-container"></div>
 
             <!-- Game Over Overlay -->
             <div id="game-over-screen"
@@ -652,11 +652,11 @@
             optionsContainer.innerHTML = '';
             q.options.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = `option-btn glass-panel p-6 rounded-xl text-left text-xl md:text-2xl font-bold text-cyan-50 hover:bg-white/10 relative group`;
+                btn.className = `option-btn glass-panel p-4 md:p-6 rounded-xl text-left text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-cyan-50 hover:bg-white/10 relative group min-h-[60px] md:min-h-[80px]`;
                 btn.innerHTML = `
                     <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-cyan-500/50 group-hover:border-white transition-colors"></div>
                     <div class="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-cyan-500/50 group-hover:border-white transition-colors"></div>
-                    <span class="relative z-10 font-mono mr-3 text-cyan-400 text-lg">0${i + 1}</span>
+                    <span class="relative z-10 font-mono mr-2 md:mr-3 text-cyan-400 text-sm md:text-lg">0${i + 1}</span>
                     <span class="relative z-10 group-hover:text-white transition-colors">${opt}</span>
                 `;
                 btn.addEventListener('mouseenter', () => playSound('hover'));

@@ -4,179 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Trivia Battle Royale</title>
+    <title>Neon Trivia Battle Royale - Survival Mode</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&display=swap"
         rel="stylesheet">
-    <style>
-        :root {
-            --neon-blue: #00f3ff;
-            --neon-pink: #bc13fe;
-            --neon-green: #0aff0a;
-            --neon-red: #ff003c;
-            --dark-bg: #050b14;
-            --glass: rgba(255, 255, 255, 0.05);
-        }
-
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background-color: var(--dark-bg);
-            color: white;
-            overflow: hidden;
-            user-select: none;
-        }
-
-        .font-display {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--neon-blue);
-            border-radius: 3px;
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
-            }
-
-            50% {
-                box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
-            }
-        }
-
-        @keyframes glitch {
-            0% {
-                transform: translate(0);
-            }
-
-            20% {
-                transform: translate(-2px, 2px);
-            }
-
-            40% {
-                transform: translate(-2px, -2px);
-            }
-
-            60% {
-                transform: translate(2px, 2px);
-            }
-
-            80% {
-                transform: translate(2px, -2px);
-            }
-
-            100% {
-                transform: translate(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-20px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .animate-slide-left {
-            animation: slideInLeft 0.5s ease-out forwards;
-        }
-
-        .glass-panel {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .neon-text-blue {
-            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
-        }
-
-        .neon-text-pink {
-            text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
-        }
-
-        .option-btn {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-btn:hover {
-            transform: scale(1.02) translateY(-2px);
-            border-color: white;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-        }
-
-        .option-btn:active {
-            transform: scale(0.98);
-        }
-
-        .timer-circle {
-            transition: stroke-dashoffset 1s linear;
-        }
-
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .correct-answer {
-            background: rgba(10, 255, 10, 0.2) !important;
-            border-color: var(--neon-green) !important;
-            box-shadow: 0 0 20px var(--neon-green) !important;
-        }
-
-        .wrong-answer {
-            background: rgba(255, 0, 60, 0.2) !important;
-            border-color: var(--neon-red) !important;
-            box-shadow: 0 0 20px var(--neon-red) !important;
-        }
-
-        .shake {
-            animation: glitch 0.3s cubic-bezier(.36, .07, .19, .97) both;
-        }
-
-        /* Input Styles */
-        .neon-input {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--neon-blue);
-            color: white;
-            padding: 12px 20px;
-            font-size: 1.2rem;
-            font-family: 'Rajdhani', sans-serif;
-            outline: none;
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .neon-input:focus {
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
-            background: rgba(0, 243, 255, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="h-screen w-screen flex flex-col relative overflow-hidden">
@@ -188,9 +21,10 @@
     <div id="start-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
         <div class="text-center p-6 md:p-8 glass-panel rounded-2xl max-w-lg border border-cyan-500/30 w-full">
             <h1
-                class="font-display text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-6 tracking-wider filter drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">
+                class="font-display text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-6 tracking-wider filter drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">
                 TRIVIA ARENA
             </h1>
+            <p class="text-sm text-cyan-400 mb-4 font-bold">SURVIVAL MODE - 3 LIVES</p>
 
             <div class="mb-8">
                 <label class="block text-cyan-300 text-sm font-bold mb-2 tracking-widest uppercase">Masukkan Nama
@@ -201,11 +35,11 @@
                     kosong!</div>
             </div>
 
-            <p class="text-gray-300 text-lg mb-8 font-light tracking-wide">
-                REAL-TIME BATTLE. DATABASE OF 100 QUESTIONS.
+            <p class="text-gray-300 text-base md:text-lg mb-8 font-light tracking-wide">
+                SURVIVE AS LONG AS YOU CAN! DATABASE OF 100 QUESTIONS.
             </p>
 
-            <button onclick="checkNameAndStart()"
+            <button onclick="game.checkNameAndStart()"
                 class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-none transition-all duration-300">
                 <div
                     class="absolute inset-0 w-full h-full bg-gradient-to-r from-cyan-500 to-blue-600 opacity-20 group-hover:opacity-40 transition-opacity">
@@ -214,7 +48,7 @@
                     class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
                 </div>
                 <span
-                    class="relative font-display font-bold text-xl tracking-[0.2em] text-white group-hover:text-cyan-100 transition-colors">ENTER
+                    class="relative font-display font-bold text-lg md:text-xl tracking-[0.2em] text-white group-hover:text-cyan-100 transition-colors">ENTER
                     ARENA</span>
             </button>
         </div>
@@ -237,7 +71,7 @@
                     <div>
                         <div class="font-bold text-cyan-100 text-lg leading-none truncate max-w-[100px]" id="card-name">
                             Player</div>
-                        <div class="text-xs text-cyan-400/70">Lvl 42</div>
+                        <div class="text-xs text-cyan-400/70">Survival Mode</div>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2 mt-2">
@@ -268,8 +102,14 @@
             <div class="flex justify-between items-center glass-panel p-4 rounded-2xl">
                 <div class="flex flex-col">
                     <span class="text-xs text-cyan-400 font-bold tracking-widest uppercase mb-1">Question <span
-                            id="q-number">1</span>/10</span>
+                            id="q-number">1</span></span>
                     <span id="q-category" class="text-xs text-purple-400 uppercase font-bold">Loading...</span>
+                </div>
+
+                <!-- Lives Display -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-red-400 font-bold tracking-widest uppercase mr-2">LIVES</span>
+                    <span id="lives-display" class="text-2xl">❤️❤️❤️</span>
                 </div>
 
                 <!-- Circular Timer -->
@@ -301,11 +141,11 @@
             <!-- Game Over Overlay -->
             <div id="game-over-screen"
                 class="absolute inset-0 bg-black/90 backdrop-blur-md z-20 rounded-xl flex-col items-center justify-center hidden">
-                <h3 class="font-display text-5xl font-bold text-white mb-2 neon-text-blue">GAME OVER</h3>
-                <p class="text-xl text-cyan-200 mb-6">Final Score: <span id="final-score"
-                        class="font-mono font-bold text-2xl text-white">0</span></p>
-                <p class="text-sm text-gray-400 mb-8">Great battle!</p>
-                <button onclick="restartGame()"
+                <h3 class="font-display text-4xl md:text-5xl font-bold text-white mb-2 neon-text-blue">GAME OVER</h3>
+                <p class="text-lg md:text-xl text-cyan-200 mb-4">Final Score: <span id="final-score"
+                        class="font-mono font-bold text-2xl md:text-3xl text-white">0</span></p>
+                <p class="text-sm md:text-base text-gray-400 mb-8">Great battle!</p>
+                <button onclick="game.restartGame()"
                     class="px-8 py-3 bg-purple-600 hover:bg-purple-500 text-white font-display font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(188,19,254,0.5)] hover:scale-105">
                     PLAY AGAIN
                 </button>
@@ -314,10 +154,10 @@
         </section>
 
         <!-- Right Panel: Leaderboard -->
-        <aside class="w-72 hidden xl:flex flex-col gap-4">
+        <aside class="w-full xl:w-72 hidden md:flex flex-col gap-4 order-3">
             <div class="glass-panel rounded-xl flex-1 flex flex-col overflow-hidden">
                 <div class="p-4 border-b border-gray-700 bg-white/5 flex justify-between items-center">
-                    <h3 class="font-display font-bold text-cyan-400 tracking-wider">RANKING</h3>
+                    <h3 class="font-display font-bold text-cyan-400 tracking-wider">TOP 10 RANKING</h3>
                     <span class="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded animate-pulse">● LIVE</span>
                 </div>
                 <div class="flex-1 overflow-y-auto p-2 space-y-2" id="leaderboard-list"></div>
@@ -337,561 +177,16 @@
 
     </main>
 
-    <script>
-        // --- AUDIO SYSTEM ---
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const audioCtx = new AudioContext();
-
-        function playSound(type) {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            const now = audioCtx.currentTime;
-            if (type === 'hover') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(400, now); osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
-                gain.gain.setValueAtTime(0.05, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-                osc.start(now); osc.stop(now + 0.05);
-            } else if (type === 'click') {
-                osc.type = 'square'; osc.frequency.setValueAtTime(200, now);
-                gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-                osc.start(now); osc.stop(now + 0.1);
-            } else if (type === 'correct') {
-                osc.type = 'triangle'; osc.frequency.setValueAtTime(440, now); osc.frequency.setValueAtTime(554.37, now + 0.1); osc.frequency.setValueAtTime(659.25, now + 0.2);
-                gain.gain.setValueAtTime(0.1, now); gain.gain.linearRampToValueAtTime(0, now + 0.4);
-                osc.start(now); osc.stop(now + 0.4);
-            } else if (type === 'wrong') {
-                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, now); osc.frequency.linearRampToValueAtTime(50, now + 0.3);
-                gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0, now + 0.3);
-                osc.start(now); osc.stop(now + 0.3);
-            } else if (type === 'tick') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(800, now);
-                gain.gain.setValueAtTime(0.05, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-                osc.start(now); osc.stop(now + 0.05);
-            }
-        }
-
-        // --- DATA: 100 QUESTIONS ---
-        const allQuestionsDB = [
-            // SCIENCE (20)
-            { q: "Apa simbol kimia untuk Emas?", options: ["Au", "Ag", "Fe", "Go"], correct: 0, category: "Science" },
-            { q: "Apakah pembangkit tenaga listrik sel?", options: ["Nukleus", "Ribosom", "Mitokondria", "Sitoplasma"], correct: 2, category: "Science" },
-            { q: "Gas apa yang diserap tanaman dari atmosfer?", options: ["Oksigen", "Nitrogen", "Karbon Dioksida", "Hidrogen"], correct: 2, category: "Science" },
-            { q: "Apa zat alami paling keras di Bumi?", options: ["Emas", "Besi", "Berlian", "Platinum"], correct: 2, category: "Science" },
-            { q: "Berapa kecepatan cahaya?", options: ["300.000 km/s", "150.000 km/s", "1.000 km/s", "3.000 km/s"], correct: 0, category: "Science" },
-            { q: "Berapa banyak tulang dalam tubuh manusia dewasa?", options: ["200", "206", "212", "190"], correct: 1, category: "Science" },
-            { q: "Apa rumus kimia untuk garam meja?", options: ["H2O", "NaCl", "CO2", "KCl"], correct: 1, category: "Science" },
-            { q: "Planet mana yang memiliki bulan terbanyak?", options: ["Jupiter", "Saturnus", "Mars", "Neptunus"], correct: 1, category: "Science" },
-            { q: "Apa nama ilmu yang mempelajari jamur?", options: ["Botani", "Mikologi", "Zoologi", "Virologi"], correct: 1, category: "Science" },
-            { q: "Bagian tanaman apa yang melakukan fotosintesis?", options: ["Akar", "Batang", "Daun", "Bunga"], correct: 2, category: "Science" },
-            { q: "Apa tulang terkecil dalam tubuh manusia?", options: ["Stapes", "Femur", "Humerus", "Tibia"], correct: 0, category: "Science" },
-            { q: "Gas apa yang paling melimpah di atmosfer bumi?", options: ["Oksigen", "Nitrogen", "Argon", "Karbon Dioksida"], correct: 1, category: "Science" },
-            { q: "Berapakah titik lebur es?", options: ["0°C", "32°F", "Keduanya Benar", "100°C"], correct: 2, category: "Science" },
-            { q: "Organ mana yang memompa darah ke seluruh tubuh?", options: ["Paru-paru", "Hati", "Jantung", "Otak"], correct: 2, category: "Science" },
-            { q: "Berapakah nomor atom Karbon?", options: ["6", "12", "8", "14"], correct: 0, category: "Science" },
-            { q: "Hukum Gerak Pertama Newton juga dikenal sebagai?", options: ["Hukum Gaya", "Hukum Inersia", "Hukum Gravitasi", "Hukum Gerak"], correct: 1, category: "Science" },
-            { q: "Apa organ terbesar dalam tubuh manusia?", options: ["Hati", "Kulit", "Jantung", "Paru-paru"], correct: 1, category: "Science" },
-            { q: "Vitamin mana yang diproduksi oleh tubuh saat terkena sinar matahari?", options: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin B12"], correct: 2, category: "Science" },
-            { q: "Apa simbol kimia untuk Oksigen?", options: ["O", "Ox", "O2", "O3"], correct: 0, category: "Science" },
-            { q: "Golongan darah mana yang menjadi donor universal?", options: ["Golongan A", "Golongan B", "Golongan AB", "Golongan O Negatif"], correct: 3, category: "Science" },
-
-            // TECHNOLOGY (20)
-            { q: "Apa kepanjangan dari CPU?", options: ["Central Processing Unit", "Computer Personal Unit", "Central Process Unit", "Central Processor United"], correct: 0, category: "Technology" },
-            { q: "Siapa pendiri Microsoft?", options: ["Steve Jobs", "Bill Gates", "Elon Musk", "Mark Zuckerberg"], correct: 1, category: "Technology" },
-            { q: "Apa kepanjangan dari HTML?", options: ["Hyper Text Markup Language", "High Tech Made Language", "Hyperlink Text Mark Language", "Home Tool Markup Language"], correct: 0, category: "Technology" },
-            { q: "Perangkat mana yang digunakan untuk memasukkan data ke komputer?", options: ["Monitor", "Printer", "Keyboard", "Speaker"], correct: 2, category: "Technology" },
-            { q: "Apa 'otak' dari sebuah komputer?", options: ["RAM", "Hard Drive", "CPU", "GPU"], correct: 2, category: "Technology" },
-            { q: "Apa kepanjangan dari URL?", options: ["Universal Resource Locator", "Uniform Resource Locator", "Universal Reference Link", "Uniform Reference Locator"], correct: 1, category: "Technology" },
-            { q: "Bahasa pemrograman mana yang dikenal sebagai 'bahasa web'?", options: ["Python", "Java", "JavaScript", "C++"], correct: 2, category: "Technology" },
-            { q: "Apa itu gigabyte (GB)?", options: ["1000 bytes", "1000 megabytes", "1024 megabytes", "100 kilobytes"], correct: 2, category: "Technology" },
-            { q: "Siapa yang mendirikan Apple Computer?", options: ["Bill Gates", "Steve Jobs & Wozniak", "Mark Zuckerberg", "Larry Page"], correct: 1, category: "Technology" },
-            { q: "Apa fungsi utama dari sistem operasi?", options: ["Main games", "Mengelola hardware dan software", "Membuat dokumen", "Browse internet"], correct: 1, category: "Technology" },
-            { q: "Apa kepanjangan dari RAM?", options: ["Read Access Memory", "Random Access Memory", "Run All Memory", "Random Automated Module"], correct: 1, category: "Technology" },
-            { q: "Komponen mana yang digunakan untuk menyimpan data secara permanen?", options: ["RAM", "Cache", "Hard Drive", "CPU"], correct: 2, category: "Technology" },
-            { q: "Apa itu alamat IP?", options: ["Internet Provider Address", "Internet Protocol Address", "Internal Portal Address", "Internet Personal Address"], correct: 1, category: "Technology" },
-            { q: "Perusahaan mana yang membuat PlayStation?", options: ["Microsoft", "Nintendo", "Sony", "Sega"], correct: 2, category: "Technology" },
-            { q: "Apa kepanjangan dari 'www'?", options: ["World Web Wide", "World Wide Web", "Wide World Web", "Web World Wide"], correct: 1, category: "Technology" },
-            { q: "Bahasa apa yang digunakan untuk membuat gaya tampilan web?", options: ["HTML", "CSS", "Python", "Java"], correct: 1, category: "Technology" },
-            { q: "Apa pintasan untuk 'Copy' di keyboard?", options: ["Ctrl + V", "Ctrl + X", "Ctrl + C", "Ctrl + P"], correct: 2, category: "Technology" },
-            { q: "Apa kepanjangan dari AI?", options: ["Automated Intelligence", "Artificial Intelligence", "Advanced Integration", "Automatic Image"], correct: 1, category: "Technology" },
-            { q: "Perangkat mana yang mengubah sinyal digital menjadi analog untuk transmisi suara?", options: ["Modem", "Router", "Switch", "Hub"], correct: 0, category: "Technology" },
-            { q: "Apa kode biner untuk angka 2?", options: ["01", "10", "11", "00"], correct: 1, category: "Technology" },
-
-            // GEOGRAPHY (20)
-            { q: "Apa samudra terbesar di Bumi?", options: ["Atlantik", "Hindia", "Pasifik", "Arktik"], correct: 2, category: "Geography" },
-            { q: "Negara mana yang memiliki populasi terbanyak?", options: ["USA", "India", "China", "Rusia"], correct: 1, category: "Geography" },
-            { q: "Apa ibu kota negara Prancis?", options: ["London", "Berlin", "Paris", "Madrid"], correct: 2, category: "Geography" },
-            { q: "Benua mana yang dikenal sebagai 'Benua Hitam'?", options: ["Asia", "Afrika", "Australia", "Amerika Selatan"], correct: 1, category: "Geography" },
-            { q: "Sungai terpanjang di dunia adalah?", options: ["Amazon", "Nil", "Yangtze", "Mississippi"], correct: 1, category: "Geography" },
-            { q: "Gurun mana yang terbesar di dunia?", options: ["Gobi", "Sahara", "Arabia", "Antarktika"], correct: 3, category: "Geography" },
-            { q: "Apa ibu kota Jepang?", options: ["Seoul", "Beijing", "Tokyo", "Bangkok"], correct: 2, category: "Geography" },
-            { q: "Negara mana yang bentuknya seperti sepatu bot?", options: ["Spanyol", "Italia", "Yunani", "Turki"], correct: 1, category: "Geography" },
-            { q: "Negara terkecil di dunia adalah?", options: ["Monako", "Vatikan", "San Marino", "Liechtenstein"], correct: 1, category: "Geography" },
-            { q: "Gunung Everest terletak di pegunungan mana?", options: ["Alpen", "Andes", "Rocky", "Himalaya"], correct: 3, category: "Geography" },
-            { q: "Apa ibu kota Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], correct: 2, category: "Geography" },
-            { q: "Sungai mana yang mengalir melalui London?", options: ["Seine", "Thames", "Rhine", "Danube"], correct: 1, category: "Geography" },
-            { q: "Apa ibu kota Amerika Serikat?", options: ["New York", "Los Angeles", "Washington D.C.", "Chicago"], correct: 2, category: "Geography" },
-            { q: "Planet mana yang dikenal sebagai Planet Merah?", options: ["Venus", "Jupiter", "Mars", "Saturnus"], correct: 2, category: "Geography" },
-            { q: "Negara mana yang dijuluki Negeri Matahari Terbit?", options: ["China", "Jepang", "Korea Selatan", "Vietnam"], correct: 1, category: "Geography" },
-            { q: "Pulau terbesar di dunia adalah?", options: ["Madagaskar", "Greenland", "Borneo", "Papua Nugini"], correct: 1, category: "Geography" },
-            { q: "Di kota mana Menara Eiffel berada?", options: ["Roma", "Berlin", "Paris", "Wina"], correct: 2, category: "Geography" },
-            { q: "Apa ibu kota Kanada?", options: ["Toronto", "Vancouver", "Ottawa", "Montreal"], correct: 2, category: "Geography" },
-            { q: "Negara mana yang menjadi rumah bagi Hutan Hujan Amazon?", options: ["Argentina", "Brazil", "Kolombia", "Peru"], correct: 1, category: "Geography" },
-            { q: "Air terjun tertinggi di dunia adalah?", options: ["Niagara Falls", "Victoria Falls", "Angel Falls", "Iguazu Falls"], correct: 2, category: "Geography" },
-
-            // HISTORY (20)
-            { q: "Siapa Presiden pertama Amerika?", options: ["Abraham Lincoln", "Thomas Jefferson", "George Washington", "John Adams"], correct: 2, category: "History" },
-            { q: "Pada tahun berapa Perang Dunia II berakhir?", options: ["1940", "1942", "1945", "1949"], correct: 2, category: "History" },
-            { q: "Siapa yang menemukan Amerika tahun 1492?", options: ["Amerigo Vespucci", "Christopher Columbus", "Ferdinand Magellan", "Vasco da Gama"], correct: 1, category: "History" },
-            { q: "Kekaisaran mana yang membangun Colosseum?", options: ["Yunani", "Romawi", "Mesir", "Persia"], correct: 1, category: "History" },
-            { q: "Siapa yang melukis Mona Lisa?", options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"], correct: 2, category: "History" },
-            { q: "Apa nama kapal yang tenggelam tahun 1912?", options: ["Lusitania", "Titanic", "Olympic", "Britannic"], correct: 1, category: "History" },
-            { q: "Siapa manusia pertama yang menginjak bulan?", options: ["Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin", "Michael Collins"], correct: 1, category: "History" },
-            { q: "Di negara mana Revolusi Industri dimulai?", options: ["USA", "Prancis", "Jerman", "Inggris Raya"], correct: 3, category: "History" },
-            { q: "Siapa penulis Deklarasi Kemerdekaan?", options: ["Benjamin Franklin", "Thomas Jefferson", "George Washington", "John Hancock"], correct: 1, category: "History" },
-            { q: "Tembok Besar berada di negara mana?", options: ["Jepang", "China", "Mongolia", "India"], correct: 1, category: "History" },
-            { q: "Siapa yang dijuluki 'Putri Orleans'?", options: ["Marie Curie", "Joan of Arc", "Ratu Victoria", "Cleopatra"], correct: 1, category: "History" },
-            { q: "Peradaban kuno mana yang membangun Machu Picchu?", options: ["Maya", "Aztec", "Inca", "Olmec"], correct: 2, category: "History" },
-            { q: "Siapa Perdana Menteri wanita pertama di Inggris?", options: ["Theresa May", "Margaret Thatcher", "Ratu Elizabeth I", "Ratu Victoria"], correct: 1, category: "History" },
-            { q: "Tahun berapa Tembok Berlin runtuh?", options: ["1987", "1989", "1991", "1985"], correct: 1, category: "History" },
-            { q: "Siapa Kaisar Prancis yang dikalahkan di Waterloo?", options: ["Louis XIV", "Napoleon Bonaparte", "Charlemagne", "Robespierre"], correct: 1, category: "History" },
-            { q: "Tahun berapa iPhone pertama dirilis?", options: ["2005", "2006", "2007", "2008"], correct: 2, category: "History" },
-            { q: "Siapa penemu telepon?", options: ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla", "Guglielmo Marconi"], correct: 1, category: "History" },
-            { q: "Siapa penguasa Inggris terlama?", options: ["Victoria", "Elizabeth II", "Henry VIII", "George III"], correct: 1, category: "History" },
-            { q: "Peradaban mana yang membangun piramida?", options: ["Romawi", "Yunani", "Mesir", "Sumeria"], correct: 2, category: "History" },
-            { q: "Peristiwa apa yang memicu Perang Dunia I?", options: ["Invasi ke Polandia", "Pembunuhan Archduke Ferdinand", "Pengeboman Pearl Harbor", "Perjanjian Versailles"], correct: 1, category: "History" },
-
-            // GENERAL (20)
-            { q: "Berapa banyak warna dalam pelangi?", options: ["5", "6", "7", "8"], correct: 2, category: "General" },
-            { q: "Apa hewan nasional Amerika?", options: ["Bald Eagle", "Beruang", "Serigala", "Singa"], correct: 0, category: "General" },
-            { q: "Buah apa yang terkenal mengusir dokter?", options: ["Jeruk", "Pisang", "Apel", "Anggur"], correct: 2, category: "General" },
-            { q: "Berapa huruf dalam alfabet Inggris?", options: ["24", "25", "26", "27"], correct: 2, category: "General" },
-            { q: "Mata uang apa yang digunakan di Jepang?", options: ["Yuan", "Won", "Yen", "Dolar"], correct: 2, category: "General" },
-            { q: "Berapa sisi segi enam?", options: ["5", "6", "7", "8"], correct: 1, category: "General" },
-            { q: "Olahraga apa yang dipertandingkan di Wimbledon?", options: ["Golf", "Cricket", "Tenis", "Rugby"], correct: 2, category: "General" },
-            { q: "Apa hewan darat terbesar?", options: ["Gajah", "Badak", "Jerapah", "Kuda Nil"], correct: 0, category: "General" },
-            { q: "Siapa yang melukis Pinokio dalam cerita?", options: ["Gepetto", "Peri Biru", "Stromboli", "Jiminy Cricket"], correct: 0, category: "General" },
-            { q: "Berapa pemain dalam satu tim sepak bola?", options: ["9", "10", "11", "12"], correct: 2, category: "General" },
-            { q: "Bahan utama Guacamole adalah?", options: ["Tomat", "Bawang", "Alpukat", "Cabai"], correct: 2, category: "General" },
-            { q: "Tanda zodiak apa yang dilambangkan dengan Banteng?", options: ["Aries", "Taurus", "Gemini", "Leo"], correct: 1, category: "General" },
-            { q: "Batu apa yang paling keras?", options: ["Berlian", "Granit", "Marmer", "Kuarsa"], correct: 0, category: "General" },
-            { q: "Negara mana yang memberikan Patung Liberty ke Amerika?", options: ["Inggris", "Prancis", "Jerman", "Spanyol"], correct: 1, category: "General" },
-            { q: "Apa nama peri dalam Peter Pan?", options: ["Silvermist", "Rosetta", "Tinker Bell", "Fawn"], correct: 2, category: "General" },
-            { q: "Berapa tuts pada piano standar?", options: ["86", "88", "90", "92"], correct: 1, category: "General" },
-            { q: "Hewan tercepat di darat adalah?", options: ["Singa", "Cheetah", "Kuda", "Macan Tutul"], correct: 1, category: "General" },
-            { q: "Apa nama anak anjing?", options: ["Anak Kucing", "Anak Anjing", "Anak Harimau", "Anak Sapi"], correct: 1, category: "General" },
-            { q: "Siapa pahlawan super Bruce Wayne?", options: ["Superman", "Iron Man", "Batman", "Flash"], correct: 2, category: "General" },
-            { q: "Berapa hari dalam tahun kabisat?", options: ["364", "365", "366", "367"], correct: 2, category: "General" }
-        ];
-
-        // --- GLOBAL VARIABLES ---
-        let activeSessionQuestions = [];
-        let currentQIndex = 0;
-        let timeLeft = 15;
-        let timerInterval;
-        let myScore = 0;
-        let myStreak = 0;
-        let multiplier = 1.0;
-        let isAnswering = false;
-        let playerName = "Player";
-
-        const opponents = [
-            { name: "CyberWolf", score: 800, streak: 2, avatar: "🐺" },
-            { name: "NeonNinja", score: 750, streak: 0, avatar: "🥷" },
-            { name: "PixelQueen", score: 680, streak: 1, avatar: "👸" },
-            { name: "BitMaster", score: 500, streak: 0, avatar: "🤖" },
-            { name: "GlitchX", score: 420, streak: 3, avatar: "👾" },
-            { name: "DataValk", score: 300, streak: 0, avatar: "🛡️" },
-        ];
-
-        // --- DOM ELEMENTS ---
-        const questionEl = document.getElementById('question-text');
-        const categoryEl = document.getElementById('q-category');
-        const optionsContainer = document.getElementById('options-container');
-        const timerText = document.getElementById('timer-text');
-        const timerCircle = document.getElementById('timer-circle');
-        const myScoreEl = document.getElementById('my-score');
-        const myStreakEl = document.getElementById('my-streak');
-        const leaderboardList = document.getElementById('leaderboard-list');
-        const chatLog = document.getElementById('chat-log');
-        const multiplierDisplay = document.getElementById('multiplier-display');
-        const multiplierBar = document.getElementById('multiplier-bar');
-        const qNumberEl = document.getElementById('q-number');
-        const startScreen = document.getElementById('start-screen');
-        const gameOverScreen = document.getElementById('game-over-screen');
-        const nameInput = document.getElementById('player-name-input');
-        const nameError = document.getElementById('name-error');
-        const cardName = document.getElementById('card-name');
-
-        // --- PARTICLE SYSTEM ---
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor(x, y, color, speed, size) {
-                this.x = x; this.y = y; this.color = color;
-                this.angle = Math.random() * Math.PI * 2;
-                this.velocity = Math.random() * speed;
-                this.size = Math.random() * size + 1;
-                this.alpha = 1; this.decay = Math.random() * 0.02 + 0.01;
-            }
-            update() {
-                this.x += Math.cos(this.angle) * this.velocity;
-                this.y += Math.sin(this.angle) * this.velocity;
-                this.alpha -= this.decay;
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        function createExplosion(x, y, color) {
-            for (let i = 0; i < 30; i++) {
-                particles.push(new Particle(x, y, color, 4, 3));
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].alpha <= 0) particles.splice(i, 1);
-            }
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // --- GAME LOGIC ---
-
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function checkNameAndStart() {
-            const val = nameInput.value.trim();
-            if (!val) {
-                nameError.style.opacity = 1;
-                return;
-            }
-            playerName = val;
-            nameError.style.opacity = 0;
-            startScreen.style.display = 'none';
-            document.getElementById('main-ui').style.opacity = '1';
-            cardName.innerText = playerName;
-            initAudio();
-            prepareSession();
-            renderLeaderboard();
-            logChat("System", "Match Started. Good luck.");
-            loadQuestion(0);
-        }
-
-        function prepareSession() {
-            // Reset scores
-            myScore = 0;
-            myStreak = 0;
-            currentQIndex = 0;
-            updateMyStats();
-
-            // Randomize questions
-            activeSessionQuestions = shuffle([...allQuestionsDB]).slice(0, 10);
-        }
-
-        function restartGame() {
-            gameOverScreen.classList.add('hidden');
-            gameOverScreen.classList.remove('flex');
-            prepareSession(); // Reshuffle questions and reset score
-            logChat("System", "New Match Started.");
-            loadQuestion(0);
-        }
-
-        function initAudio() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-        }
-
-        function loadQuestion(index) {
-            isAnswering = true;
-            currentQIndex = index;
-
-            questionEl.style.opacity = 0;
-            questionEl.classList.remove('animate-slide-left');
-            void questionEl.offsetWidth;
-
-            setTimeout(() => {
-                const q = activeSessionQuestions[index];
-                questionEl.innerText = q.q;
-                categoryEl.innerText = q.category;
-                questionEl.style.opacity = 1;
-                questionEl.classList.add('animate-slide-left');
-                renderOptions(q);
-                startTimer();
-                qNumberEl.innerText = index + 1;
-            }, 300);
-        }
-
-        function renderOptions(q) {
-            optionsContainer.innerHTML = '';
-            q.options.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.className = `option-btn glass-panel p-4 md:p-6 rounded-xl text-left text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-cyan-50 hover:bg-white/10 relative group min-h-[60px] md:min-h-[80px]`;
-                btn.innerHTML = `
-                    <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-cyan-500/50 group-hover:border-white transition-colors"></div>
-                    <div class="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-cyan-500/50 group-hover:border-white transition-colors"></div>
-                    <span class="relative z-10 font-mono mr-2 md:mr-3 text-cyan-400 text-sm md:text-lg">0${i + 1}</span>
-                    <span class="relative z-10 group-hover:text-white transition-colors">${opt}</span>
-                `;
-                btn.addEventListener('mouseenter', () => playSound('hover'));
-                btn.addEventListener('click', () => handleAnswer(i, btn));
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function startTimer() {
-            clearInterval(timerInterval);
-            timeLeft = 15;
-            timerText.innerText = timeLeft;
-            const circumference = 175.9;
-            timerCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-            timerCircle.style.strokeDashoffset = 0;
-            timerCircle.style.stroke = '#00f3ff';
-
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timerText.innerText = timeLeft;
-                const offset = circumference - (timeLeft / 15) * circumference;
-                timerCircle.style.strokeDashoffset = offset;
-
-                if (timeLeft <= 5) {
-                    timerText.classList.add('text-red-500');
-                    timerCircle.style.stroke = '#ff003c';
-                    playSound('tick');
-                } else {
-                    timerText.classList.remove('text-red-500');
-                }
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    handleTimeUp();
-                }
-            }, 1000);
-        }
-
-        function handleAnswer(selectedIndex, btnElement) {
-            if (!isAnswering) return;
-            isAnswering = false;
-            clearInterval(timerInterval);
-            playSound('click');
-
-            const currentQ = activeSessionQuestions[currentQIndex];
-            const correctIndex = currentQ.correct;
-            const allBtns = optionsContainer.children;
-
-            Array.from(allBtns).forEach(btn => btn.style.pointerEvents = 'none');
-
-            if (selectedIndex === correctIndex) {
-                btnElement.classList.add('correct-answer');
-                playSound('correct');
-                const basePoints = 100;
-                const timeBonus = timeLeft * 10;
-                const streakBonus = (myStreak * 50);
-                const roundScore = Math.round((basePoints + timeBonus + streakBonus) * multiplier);
-
-                myScore += roundScore;
-                myStreak++;
-                updateMultiplier();
-
-                const rect = btnElement.getBoundingClientRect();
-                createExplosion(rect.left + rect.width / 2, rect.top + rect.height / 2, '#0aff0a');
-
-                showPhaseOverlay("BENAR!", `+${roundScore} Poin`, "text-green-400");
-                logChat("System", `Jawaban benar! Streak: ${myStreak}`);
-                simulateOpponentActivity();
-
-            } else {
-                btnElement.classList.add('wrong-answer');
-                document.body.classList.add('shake');
-                setTimeout(() => document.body.classList.remove('shake'), 500);
-                playSound('wrong');
-                myStreak = 0;
-                updateMultiplier();
-                allBtns[correctIndex].classList.add('correct-answer');
-                showPhaseOverlay("SALAH", "Coba lagi nanti", "text-red-500");
-                logChat("System", "Jawaban salah.");
-            }
-
-            updateMyStats();
-
-            setTimeout(() => {
-                if (currentQIndex < activeSessionQuestions.length - 1) {
-                    loadQuestion(currentQIndex + 1);
-                } else {
-                    endGame();
-                }
-            }, 3000);
-        }
-
-        function handleTimeUp() {
-            isAnswering = false;
-            const currentQ = activeSessionQuestions[currentQIndex];
-            const correctIndex = currentQ.correct;
-            const allBtns = optionsContainer.children;
-
-            allBtns[correctIndex].classList.add('correct-answer');
-            myStreak = 0;
-            updateMultiplier();
-            playSound('wrong');
-            showPhaseOverlay("WAKTU HABIS", "Jawaban terkunci", "text-gray-400");
-            updateMyStats();
-
-            setTimeout(() => {
-                if (currentQIndex < activeSessionQuestions.length - 1) {
-                    loadQuestion(currentQIndex + 1);
-                } else {
-                    endGame();
-                }
-            }, 3000);
-        }
-
-        function updateMyStats() {
-            myScoreEl.innerText = myScore;
-            myStreakEl.innerText = myStreak;
-            myScoreEl.parentElement.classList.add('scale-110');
-            setTimeout(() => myScoreEl.parentElement.classList.remove('scale-110'), 200);
-        }
-
-        function updateMultiplier() {
-            let newMultiplier = 1.0;
-            if (myStreak > 0) {
-                newMultiplier = 1.0 + (Math.floor(myStreak / 3) * 0.5);
-                if (newMultiplier > 5.0) newMultiplier = 5.0;
-            }
-            multiplier = newMultiplier;
-            multiplierDisplay.innerText = `x${multiplier.toFixed(1)}`;
-            const percentage = (myStreak % 3) / 3 * 100;
-            multiplierBar.style.width = `${percentage}%`;
-
-            if (multiplier > 1.0) {
-                multiplierDisplay.classList.add('text-purple-400', 'neon-text-pink');
-            } else {
-                multiplierDisplay.classList.remove('text-purple-400', 'neon-text-pink');
-            }
-        }
-
-        function showPhaseOverlay(title, subtitle, colorClass) {
-            const overlay = document.getElementById('phase-overlay');
-            // Note: I'm using the Game Over Screen for full results, 
-            // but we can reuse the overlay concept or just use chat for feedback.
-            // For this version, let's just update chat and leaderboard for speed.
-            logChat("Feedback", `${title} - ${subtitle}`);
-        }
-
-        function endGame() {
-            gameOverScreen.classList.remove('hidden');
-            gameOverScreen.classList.add('flex');
-            document.getElementById('final-score').innerText = myScore;
-            createExplosion(window.innerWidth / 2, window.innerHeight / 2, '#bc13fe');
-            createExplosion(window.innerWidth / 3, window.innerHeight / 3, '#00f3ff');
-            createExplosion(window.innerWidth / 1.5, window.innerHeight / 2, '#0aff0a');
-            logChat("System", "Sesi permainan selesai.");
-        }
-
-        function renderLeaderboard() {
-            const allPlayers = [
-                { name: playerName, score: myScore, streak: myStreak, isUser: true },
-                ...opponents
-            ];
-            allPlayers.sort((a, b) => b.score - a.score);
-            leaderboardList.innerHTML = '';
-
-            allPlayers.forEach((p, i) => {
-                const item = document.createElement('div');
-                const rankColor = i === 0 ? 'text-yellow-400' : (i === 1 ? 'text-gray-300' : (i === 2 ? 'text-orange-400' : 'text-gray-500'));
-                let streakIcon = '';
-                if (p.streak >= 3) streakIcon = '<span class="text-orange-500 text-lg animate-pulse">🔥</span>';
-
-                if (p.isUser) {
-                    item.className = "flex items-center justify-between p-2 rounded bg-cyan-900/20 border border-cyan-500/50";
-                } else {
-                    item.className = "flex items-center justify-between p-2 rounded hover:bg-white/5 transition-colors";
-                }
-
-                item.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <span class="font-mono font-bold w-4 ${rankColor}">${i + 1}</span>
-                        <div class="w-8 h-8 rounded bg-gray-700 flex items-center justify-center text-sm">
-                            ${p.isUser ? '👤' : p.avatar}
-                        </div>
-                        <div>
-                            <div class="text-sm font-bold ${p.isUser ? 'text-cyan-300' : 'text-gray-200'}">${p.name}</div>
-                            <div class="text-xs text-gray-500">${p.streak} streak</div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col items-end">
-                        <div class="font-mono font-bold text-white">${p.score}</div>
-                        ${streakIcon}
-                    </div>
-                `;
-                leaderboardList.appendChild(item);
-            });
-        }
-
-        function simulateOpponentActivity() {
-            const randomOpponent = opponents[Math.floor(Math.random() * opponents.length)];
-            if (Math.random() > 0.4) {
-                randomOpponent.streak += 1;
-                randomOpponent.score += (100 + Math.random() * 50);
-            } else {
-                randomOpponent.streak = 0;
-            }
-            if (Math.random() > 0.7) {
-                const chats = ["wow", "cepat!", "saya tahu", "glitch?", "keren"];
-                const randomChat = chats[Math.floor(Math.random() * chats.length)];
-                logChat(randomOpponent.name, randomChat);
-            }
-            renderLeaderboard();
-        }
-
-        function logChat(user, msg) {
-            const entry = document.createElement('div');
-            const userColor = user === "System" ? "text-cyan-400" : "text-purple-400";
-            entry.className = "animate-slide-left opacity-0";
-            entry.innerHTML = `<span class="${userColor} font-bold">${user}:</span><span class="text-gray-300">${msg}</span>`;
-            chatLog.appendChild(entry);
-            requestAnimationFrame(() => entry.classList.remove('opacity-0'));
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-
-        document.querySelectorAll('button').forEach(b => {
-            b.addEventListener('mouseenter', () => playSound('hover'));
-            b.addEventListener('click', () => playSound('click'));
-        });
-
-        // Allow Enter key to start game
-        nameInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkNameAndStart();
-            }
-        });
-
+    <script type="module" src="js/particles.js"></script>
+    <script type="module" src="js/leaderboard.js"></script>
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/audio.js"></script>
+    <script type="module" src="js/game.js"></script>
+    <script type="module">
+        import * as game from './js/game.js';
+        
+        // Make game functions available globally
+        window.game = game;
     </script>
 </body>
 
